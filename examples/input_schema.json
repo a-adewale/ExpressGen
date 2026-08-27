@@ -1,0 +1,83 @@
+{
+  "database": {
+    "provider": "postgresql",
+    "urlEnv": "DATABASE_URL"
+  },
+  "api": {
+    "basePath": "/api"
+  },
+  "models": [
+    {
+      "name": "User",
+      "permissions": {
+        "read": ["admin", "manager"],
+        "write": ["admin"]
+      },
+      "fields": {
+        "id": {
+          "type": "string",
+          "primary": true,
+          "auto": true
+        },
+        "email": {
+          "type": "string",
+          "unique": true
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean",
+          "optional": true,
+          "default": true
+        },
+        "createdAt": {
+          "type": "datetime",
+          "default": {
+            "function": "now"
+          }
+        }
+      }
+    },
+    {
+      "name": "Post",
+      "permissions": {
+        "read": ["admin", "manager"],
+        "write": ["admin"]
+      },
+      "fields": {
+        "id": {
+          "type": "integer",
+          "primary": true,
+          "auto": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "viewCount": {
+          "type": "integer",
+          "default": 0
+        },
+        "rating": {
+          "type": "number",
+          "optional": true
+        },
+        "published": {
+          "type": "boolean",
+          "default": false
+        },
+        "author": {
+          "type": "relation",
+          "target": "User",
+          "foreignKey": "authorId",
+          "references": "id",
+          "backref": "posts",
+          "onDelete": "Cascade"
+        }
+      }
+    }
+  ]
+}
