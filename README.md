@@ -225,20 +225,6 @@ database adapters. It then syntax-checks every generated JavaScript file and
 imports the generated server without running npm install or connecting to a
 database.
 
-## Push to GitHub
-
-From this repository:
-
-    git init
-    git switch -c feature/initial-expressgen
-    git add .
-    git commit -m "feat: build deterministic Express and Prisma scaffolder"
-    git remote add origin YOUR_REPOSITORY_URL
-    git push -u origin feature/initial-expressgen
-
-Then open a pull request from feature/initial-expressgen into your protected
-default branch.
-
 ## Current boundaries
 
 - Relations are singular source-to-target relationships with a reverse array.
